@@ -1,0 +1,85 @@
+﻿@page
+@model PRN221_Project_Blog.Pages.SignupModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register account</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/assets/css/register-styles.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+</head>
+
+<body>
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="title_container">
+            <h2>Register account</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+                <form>
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="email" id="email" placeholder="Email" required/>
+                    </div>
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="text" id="username" placeholder="Username" required/>
+                    </div>
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input id="password" type="password" id="password" placeholder="Password" required/>
+                    </div>
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input id="confirm_password" type="password" name="password" placeholder="Re-type Password"
+                               required/>
+                    </div>
+                    <span id="message"></span>
+                    <input class="button" type="button" value="Register"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- check fields -->
+<script>
+    function checkPass(){
+        if ($("#password").val() == "" && $("#confirm_password").val() == "") {
+            $('#message').html('')
+            return false;
+        }else{
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('');
+                return true;
+            } else{
+                $('#message').html('Passwords not match').css('color', 'red');
+                return false;
+            }
+        }
+    }
+</script>
+
+<!--send data to back end-->
+<script>
+    $("input[type=button]").on('click', function () {
+        var useremail = $("#email").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var pass2 = $("#confirm_password").val();
+        if (useremail == "" || username == "" || password == "" || pass2 == ""){
+            alert("You must enter all fields");
+        }
+        else{
+           
+        }
+    });
+
+</script>
+<!--send data to backend-->
+
+</html>

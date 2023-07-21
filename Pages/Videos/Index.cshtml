@@ -1,0 +1,198 @@
+﻿@page
+@model PRN221_Project_Blog.Pages.Videos.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+    <!-- title -->
+    <title>Recommended videos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">   
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap-min.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="~/assets/css/carousel.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="~/assets/css/animate.css">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="~/assets/css/meanmenu.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <!-- footer -->
+    <link rel="stylesheet" href="~/assets/css/footer-styles.css">
+</head>
+
+<body>
+    <!-- header -->
+    <div id="sticker-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 85px;">
+        <div class="top-header-area" id="sticker">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 text-center">
+                        <div class="main-menu-wrap">
+                            <!-- logo -->
+                            <div class="site-logo">
+                                <a href="/home">
+                                    <img src="~/assets/img/logo.png" alt="logo">
+                                </a>
+                            </div>
+                            <!-- logo -->
+                            <!-- menu start -->
+                            <nav class="main-menu">
+                                <ul>
+                                    <li class="current-list-item"><a href="/home">Home</a></li>
+                                    <li>
+                                        <a href="/blogs">Recipes</a>
+                                        <ul id="cate-menu" class="sub-menu">
+                                            @foreach (var cate in Model.listCate)
+                                            {
+                                                <li><a href="/blogs/category?cateid=@cate.Id">@cate.Category1</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li><a href="/videos">Recommended videos</a></li>
+                                    <li class="log">
+                                        <div style="color: whitesmoke">HIhIhAha</div>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                            <div class="mobile-menu"></div>
+                            <!-- menu end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+
+    <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <input type="text" value="" id="userinfo" hidden>
+                        <p>Here are the recipes that I get inspriration from</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end breadcrumb section -->
+    <!-- latest news -->
+    <div class="latest-news mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="section-title">
+                        <h3><span class="orange-text">Recommended </span>recipes</h3>
+                        <p>The recipes that i get inspiration from</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row all-posts-display">
+                @if(Model.listVideo.Count == 0)
+                {
+                    <h5>Currently there are no videos</h5>
+                }
+                @foreach (var vid in Model.listVideo)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-about">
+                            <iframe src="https://www.youtube.com/embed/@vid.EmbeddedLink"> </iframe>
+                            <div class="container">
+                                <h4><b>@vid.Title</b></h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="pagination-wrap">
+                                <ul>
+                                    <li class="btn-pre"><a href="#">Prev</a></li>
+                                    <li class="btn-next"><a href="#">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end latest news -->
+
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box about-widget">
+                        <h2 class="widget-title">About</h2>
+                        <p>
+                            As an avid food-maker and a person who loves helping others, I decided to create this blog in order to support all the people that are struggling with cooking because it can be really fun and easy.<br>
+                            So grab a knife and let's get started, shall we?
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box get-in-touch">
+                        <h2 class="widget-title">Get in Touch</h2>
+                        <ul>
+                            <li>Phone: 1122334455</li>
+                            <li>Email: support@fruitkha.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">Pages</h2>
+                        <ul>
+                            <li><a href="/home">Home</a></li>
+                            <li><a href="/blogs">Recipes</a></li>
+                            <li><a href="/tips">Tips</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box subscribe">
+                        <h2 class="widget-title">Tell me what you think</h2>
+                        <p>Speak your thoughts here.</p>
+                        <form>
+                            <input class="review" type="text" placeholder="Name" required>
+                            <input class="review" type="text" placeholder="Job(optional)">
+                            <textarea placeholder="Your message" required></textarea>
+                            <button type="button"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end footer -->
+
+</body>
+</html>
+

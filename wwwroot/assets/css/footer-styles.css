@@ -1,0 +1,16 @@
+﻿.footer-area {
+    letter-spacing: 1.1px;
+}
+
+.review {
+    height: 32px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+textarea {
+    width: 295px;
+    height: 92px;
+    padding: 10px;
+}

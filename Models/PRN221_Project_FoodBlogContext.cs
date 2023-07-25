@@ -138,6 +138,10 @@ namespace PRN221_Project_Blog.Models
             {
                 entity.ToTable("User");
 
+                entity.Property(e => e.Email)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Password)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -145,12 +149,6 @@ namespace PRN221_Project_Blog.Models
                 entity.Property(e => e.Username)
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.UserRole)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.UserRoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_Role");
             });
 
             modelBuilder.Entity<Video>(entity =>

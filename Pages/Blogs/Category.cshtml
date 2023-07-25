@@ -1,7 +1,16 @@
 ﻿@page
 @model PRN221_Project_Blog.Pages.Blogs.CategoryModel
+@using Newtonsoft.Json;
+@using PRN221_Project_Blog.Models;
 @{
     Layout = null;
+
+    User currentUser = null;
+    string current = HttpContext.Session.GetString("CurrentUser");
+    if (current != null)
+    {
+        currentUser = JsonConvert.DeserializeObject<User>(current);
+    }
 }
 
 <!DOCTYPE html>
@@ -68,7 +77,23 @@
                                     </li>
                                     <li><a href="/videos">Recommended videos</a></li>
                                     <li class="log">
-                                        <div style="color: whitesmoke">HIhIhAha</div>
+                                        <div style="color: whitesmoke">
+                                            @if (currentUser != null)
+                                            {
+                                                <a href="#">@currentUser.Username</a>
+                                                <ul class="sub-menu" style="width: 100px">
+                                                    <li>
+                                                        <a href="/home" onclick="LogoutAccount()">Logout</a>
+                                                    </li>
+
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <a href="/login">Login</a>
+                                            }
+
+                                        </div>
                                     </li>
                                 </ul>
                             </nav>

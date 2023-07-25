@@ -15,6 +15,21 @@
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 </head>
 
+<style>
+    button{
+        background: #f5ba1a;
+        height: 35px;
+        line-height: 35px;
+        width: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #fff;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+</style>
+
 <body>
 <div class="form_wrapper">
     <div class="form_container">
@@ -23,7 +38,7 @@
         </div>
         <div class="row clearfix">
             <div class="">
-                <form>
+                <form method="post">
                     <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
                         <input type="email" id="email" placeholder="Email" required/>
                     </div>
@@ -48,24 +63,6 @@
 
 <!-- check fields -->
 <script>
-    function checkPass(){
-        if ($("#password").val() == "" && $("#confirm_password").val() == "") {
-            $('#message').html('')
-            return false;
-        }else{
-            if ($('#password').val() == $('#confirm_password').val()) {
-                $('#message').html('');
-                return true;
-            } else{
-                $('#message').html('Passwords not match').css('color', 'red');
-                return false;
-            }
-        }
-    }
-</script>
-
-<!--send data to back end-->
-<script>
     $("input[type=button]").on('click', function () {
         var useremail = $("#email").val();
         var username = $("#username").val();
@@ -74,8 +71,8 @@
         if (useremail == "" || username == "" || password == "" || pass2 == ""){
             alert("You must enter all fields");
         }
-        else{
-           
+        else if (password != pass2) {
+            alert("Passwords not match");
         }
     });
 

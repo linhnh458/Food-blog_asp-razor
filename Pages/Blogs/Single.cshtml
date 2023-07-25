@@ -1,11 +1,17 @@
 ﻿@page
-@inject IHttpContextAccessor Accessor
 @model PRN221_Project_Blog.Pages.Blogs.SingleModel
+@using Newtonsoft.Json;
+@using PRN221_Project_Blog.Models;
 @{
     Layout = null;
+
     var blog = Model.SinglePost;
-    var currentUser = @Accessor.HttpContext.Session.GetString("CurrentUser");
-    var username = @Accessor.HttpContext.Session.GetString("Username");
+    User currentUser = null;
+    string current = HttpContext.Session.GetString("CurrentUser");
+    if (current != null)
+    {
+        currentUser = JsonConvert.DeserializeObject<User>(current);
+    }
 }
 
 <!DOCTYPE html>
@@ -92,10 +98,10 @@
                                         <div style="color: whitesmoke">
                                             @if (currentUser != null)
                                             {
-                                                <a href="#">@username</a>
+                                                <a href="#">@currentUser.Username</a>
                                                 <ul class="sub-menu" style="width: 100px">
                                                     <li>
-                                                        <a href="/home" onclick="LogoutAccount()">Logout</a>
+                                                        <a asp-page="Login" asp-page-handler="Logout">Logout</a>
                                                     </li>
 
                                                 </ul>
@@ -241,15 +247,6 @@
     </div>
     <!-- end footer -->
 
-    <script>
-        function LogoutAccount(){
-            alert("you have logged out");
-            Session.Remove("CurrentUser");
-            //HttpContext.Session.Remove("Username");
-        }
-    </script>
-
-        
 </body>
 </html>
 

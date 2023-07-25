@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace PRN221_Project_Blog
 {
     public class Program
@@ -7,14 +9,27 @@ namespace PRN221_Project_Blog
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
-            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddRazorPages() ;
             builder.Services.AddDistributedMemoryCache();
+
+            //builder.Services.ConfigureApplicationCookie(options => {
+            //    options.LoginPath = "/login/";
+            //});
+
+            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+            //options =>
+            //{
+            //    options.LoginPath = new PathString("/login");
+            //    //options.AccessDeniedPath = new PathString("/auth/denied");
+            //});
 
             builder.Services.AddSession(cfg => {            
                 cfg.Cookie.Name = "foodblog";             
                 cfg.IdleTimeout = new TimeSpan(0, 1, 0);  
             });
+
+            
 
             var app = builder.Build();
             app.UseSession();

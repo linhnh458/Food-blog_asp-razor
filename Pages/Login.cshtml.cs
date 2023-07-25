@@ -22,6 +22,12 @@ namespace PRN221_Project_Blog.Pages
         {
         }
 
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("CurrentUser");
+            return Redirect("/home");
+        }
+
         public IActionResult OnPost()
         {
             string username = UserInfo.Username;

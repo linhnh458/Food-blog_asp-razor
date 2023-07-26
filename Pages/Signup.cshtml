@@ -40,30 +40,40 @@
             <div class="">
                 <form method="post">
                     <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <input type="email" id="email" placeholder="Email" required/>
+                        <input type="email" id="email" placeholder="Email" required asp-for="RegisterAccount.Email"/>
                     </div>
                     <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <input type="text" id="username" placeholder="Username" required/>
+                        <input type="text" id="username" placeholder="Username" required asp-for="RegisterAccount.Username"/>
                     </div>
                     <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input id="password" type="password" id="password" placeholder="Password" required/>
+                        <input id="password" type="password" id="password" placeholder="Password" required asp-for="RegisterAccount.Password"/>
                     </div>
                     <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input id="confirm_password" type="password" name="password" placeholder="Re-type Password"
+                        <input id="confirm_password" type="password" asp-for="RegisterAccount.RePassword" placeholder="Re-type Password"
                                required/>
                     </div>
                     <span id="message"></span>
-                    <input class="button" type="button" value="Register"/>
+                    <button onclick="CheckFields()">Register</button>
                 </form>
+            </div>
+            <div style="text-align:center">
+                <a href="/home">Home</a>
             </div>
         </div>
     </div>
 </div>
 </body>
 
-<!-- check fields -->
+
+@if(ViewData["Error"] != null)
+{
+    <script>
+        alert(ViewData["Error"])
+    </script>
+}
+
 <script>
-    $("input[type=button]").on('click', function () {
+    function CheckFields(){
         var useremail = $("#email").val();
         var username = $("#username").val();
         var password = $("#password").val();
@@ -74,9 +84,7 @@
         else if (password != pass2) {
             alert("Passwords not match");
         }
-    });
-
+    }
 </script>
-<!--send data to backend-->
 
 </html>

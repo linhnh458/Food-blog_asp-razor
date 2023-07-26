@@ -85,7 +85,7 @@
                                                     @if(currentUser.UserRoleId == 1)
                                                     {
                                                         <li>
-                                                            <a href="/admin/manager">Admin Manager</a>
+                                                            <a href="/admin/blogs/addBlog">Admin Manager</a>
                                                         </li>
                                                     }
                                                     <li>
@@ -192,28 +192,19 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
                 <div class="testimonial-sliders">
-                    <div class="single-testimonial-slider">
-                        <div class="client-meta">
-                            <h3>David Niph <span>Local shop owner</span></h3>
-                            <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                            </p>
-                            <div class="last-icon">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-testimonial-slider">
-                        <div class="client-meta">
-                            <h3>Jacob Sikim <span>Local shop owner</span></h3>
-                            <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                            </p>
-                            <div class="last-icon">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                    </div>
+                        @if(Model.testimonials.Count > 0)
+                        {
+                            @foreach(var t in Model.testimonials){
+                                <div class="single-testimonial-slider">
+                                    <div class="client-meta">
+                                        <h3>@t.Name <span>@t.Job</span></h3>
+                                        <p class="testimonial-body">
+                                            " @t.Content"
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        }
                 </div>
             </div>
         </div>
@@ -257,11 +248,11 @@
                     <div class="footer-box subscribe">
                         <h2 class="widget-title">Tell me what you think</h2>
                         <p>Speak your thoughts here.</p>
-                        <form>
-                            <input class="review" type="text" placeholder="Name" required>
-                            <input class="review" type="text" placeholder="Job(optional)">
-                            <textarea placeholder="Your message" required></textarea>
-                            <button type="button"><i class="fas fa-paper-plane"></i></button>
+                        <form method="post">
+                            <input class="review" type="text" placeholder="Name" required asp-for="Testimonial.Name">
+                            <input class="review" type="text" placeholder="Job(optional)" asp-for="Testimonial.Job">
+                            <textarea placeholder="Your message" required asp-for="Testimonial.Comment"></textarea>
+                            <button><i class="fas fa-paper-plane"></i></button>
                         </form>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 ﻿@page
-@model PRN221_Project_Blog.Pages.Admin.BlogSettingsModel
+@model PRN221_Project_Blog.Pages.Admin.Blogs.BlogSettingsModel
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en"
       class="light-style layout-menu-fixed"
@@ -74,7 +75,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="/admin/manager" class="menu-link">
+                        <a href="/admin/blogs/addBlog" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -84,7 +85,7 @@
                         <span class="menu-header-text">Pages</span>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/blogSettings" class="menu-link">
+                        <a href="/admin/blogs/blogSettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Blog settings</div>
                         </a>
@@ -133,9 +134,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(Model.listBlog.Count > 0)
+                                        @if (Model.listBlog.Count > 0)
                                         {
-                                            @foreach(var blog in Model.listBlog)
+                                            @foreach (var blog in Model.listBlog)
                                             {
                                                 <tr>
                                                     <th scope="row" className="blogid">@blog.Id}</th>
@@ -146,7 +147,7 @@
                                                     <td id="status" style="text-align: center">@blog.Status</td>
                                                     <td style="text-align: center">
                                                         <a href="">Edit</a>
-                                                        <a asp-page="BlogSettings" asp-page-handler="DeleteBlog(@blog.Id)" >Delete</a>
+                                                        <a asp-page="BlogSettings" asp-page-handler="DeleteBlog(@blog.Id)">Delete</a>
                                                     </td>
                                                 </tr>
                                             }
@@ -170,15 +171,15 @@
         </div>
     </div>
     <!-- / Layout wrapper -->
-    
+
     <script>
-        function DeleteBlog(int id){
+        function DeleteBlog(int id) {
             var result = confirm("Do you really want to delete this blog?");
-                    if (result) {
-                        //Logic to delete the item
-                    }
+            if (result) {
+                //Logic to delete the item
+            }
         }
-        
+
     </script>
 </body>
 </html>

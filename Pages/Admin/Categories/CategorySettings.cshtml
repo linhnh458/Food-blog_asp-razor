@@ -1,5 +1,5 @@
 ﻿@page
-@model PRN221_Project_Blog.Pages.Admin.AddVideoModel
+@model PRN221_Project_Blog.Pages.Admin.Categories.CategorySettingsModel
 @{
     Layout = null;
 }
@@ -54,7 +54,7 @@
 </style>
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar  ">
+    <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -73,7 +73,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="/admin/manager" class="menu-link">
+                        <a href="/admin/blogs/addBlog" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -83,13 +83,13 @@
                         <span class="menu-header-text">Pages</span>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/blogSettings" class="menu-link">
+                        <a href="/admin/blogs/blogSettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Blog settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/categorySettings" class="menu-link">
+                        <a href="/admin/category/categorySettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Category settings</div>
                         </a>
@@ -111,77 +111,65 @@
             <!-- End Menu -->
             <!-- Layout container -->
             <div class="layout-page">
-                <!-- Navbar -->
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                     id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-sm"></i>
-                        </a>
-                    </div>
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                    </div>
-                </nav>
-                <!-- / Navbar -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4" id="edit-title">Add video</h4>
-                        <div class="row">
-                            <!-- Basic Layout -->
-                            <div class="col-xxl">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row mb-3">
-                                                <label class="col-sm-2 col-form-label">Title</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" required/>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label class="col-sm-2 col-form-label">Youtube link</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" required />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label class="col-sm-2 col-form-label">Status</label>
-                                                <div class="col-sm-10">
-                                                    <select id="status">
-                                                        <option value="0">Hide</option>
-                                                        <option value="1">Show</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row justify-content-end" id="send">
-                                                <div class="col-sm-10">
-                                                    <button type="button" class="btn btn-primary" id="btn-add-vid">Send</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                        <!-- Responsive Table -->
+                        <div class="card">
+                            <h5 class="card-header">Responsive Table</h5>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table" id="my-table">
+                                    <thead>
+                                        <tr class="text-nowrap">
+                                            <th>ID</th>
+                                            <th>Category name</th>
+                                            <th style="text-align: center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.listCate.Count > 0)
+                                        {
+                                            @foreach (var cate in Model.listCate)
+                                            {
+                                                <tr>
+                                                    <th scope="row" className="blogid">@cate.Id}</th>
+                                                    <td id="cate">@cate.Category1</td>
+                                                    <td id="cate">Delete</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <a href="/admin/manager">
+                                    <button style="margin: 19px 0 19px 19px">Add blog</button>
+                                </a>
                             </div>
                         </div>
+                        <!--/ Responsive Table -->
                     </div>
+                    <!-- / Content -->
+
+                    <div class="content-backdrop fade"></div>
                 </div>
-                <!-- / Content -->
-                <div class="content-backdrop fade"></div>
+                <!-- Content wrapper -->
             </div>
-            <!-- Content wrapper -->
+            <!-- / Layout page -->
         </div>
-        <!-- / Layout page -->
     </div>
+    <!-- / Layout wrapper -->
 
+    <script>
+        function DeleteBlog(int id) {
+            var result = confirm("Do you really want to delete this blog?");
+            if (result) {
+                //Logic to delete the item
+            }
+        }
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-
-
-    </div>
+    </script>
 </body>
 
 </html>
+
 

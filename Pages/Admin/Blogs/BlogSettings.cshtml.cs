@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PRN221_Project_Blog.Models;
 
-namespace PRN221_Project_Blog.Pages.Admin
+namespace PRN221_Project_Blog.Pages.Admin.Blogs
 {
     public class BlogSettingsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace PRN221_Project_Blog.Pages.Admin
         public IActionResult OnGetDeleteBlog(int blogid)
         {
             Blog blog = context.Blogs.FirstOrDefault(x => x.Id == blogid);
-            if(blog == null)
+            if (blog == null)
             {
                 return NotFound();
             }

@@ -18,11 +18,11 @@ namespace PRN221_Project_Blog.Pages.Blogs
 
         [BindProperty]
         public string PostComment { get; set; }
-
+        
         public void OnGet(int blogid)
         {
             listCate = context.Categories.ToList();
-            listComment = context.Comments.Where(x => x.BlogId == blogid).Include(x => x.UserNavigation).ToList();
+            listComment = context.Comments.Where(x => x.Status == 1 && x.BlogId == blogid ).Include(x => x.UserNavigation).ToList();
             var AllBlogs = from blog in context.Blogs
                            orderby blog.CreatedDate descending
                            select blog;
@@ -58,7 +58,8 @@ namespace PRN221_Project_Blog.Pages.Blogs
                         BlogId = blogid,
                         BlogTitle = SinglePost.Title,
                         Content = commentContent,
-                        User = currentUser.Id
+                        User = currentUser.Id,
+                        Status = 0
                     };
                     context.Comments.Add(c);
                     context.SaveChanges();
@@ -70,9 +71,7 @@ namespace PRN221_Project_Blog.Pages.Blogs
                     return Page();
                 }
             }
-            //ViewData["Error"] = message;
             return Redirect("/blogs/single?blogid=" + blogid);
-            //return Page();
         }
     }
 }

@@ -12,21 +12,17 @@ namespace PRN221_Project_Blog
             builder.Services.AddRazorPages() ;
             builder.Services.AddDistributedMemoryCache();
 
-            //builder.Services.ConfigureApplicationCookie(options => {
-            //    options.LoginPath = "/login/";
-            //});
-
             //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             //                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
             //options =>
             //{
             //    options.LoginPath = new PathString("/login");
-            //    //options.AccessDeniedPath = new PathString("/auth/denied");
+            //    options.AccessDeniedPath = "/AccessDenied.html";
             //});
 
             builder.Services.AddSession(cfg => {            
                 cfg.Cookie.Name = "foodblog";             
-                cfg.IdleTimeout = new TimeSpan(0, 1, 0);  
+                cfg.IdleTimeout = new TimeSpan(0, 5, 0);  
             });
 
             

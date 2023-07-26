@@ -8,6 +8,7 @@ namespace PRN221_Project_Blog.Models
         public User()
         {
             Blogs = new HashSet<Blog>();
+            Comments = new HashSet<Comment>();
             Tips = new HashSet<Tip>();
         }
 
@@ -18,6 +19,7 @@ namespace PRN221_Project_Blog.Models
         public int UserRoleId { get; set; }
 
         public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Tip> Tips { get; set; }
     }
 }

@@ -82,15 +82,15 @@
                                             {
                                                 <a href="#">@currentUser.Username</a>
                                                 <ul class="sub-menu" style="width: 100px">
-                                                    <li>
-                                                        <a asp-page="Login" asp-page-handler="Logout">Logout</a>
-                                                    </li>
                                                     @if(currentUser.UserRoleId == 1)
                                                     {
                                                         <li>
-                                                            <a href="/admin/manager">Manager</a>
+                                                            <a href="/admin/manager">Admin Manager</a>
                                                         </li>
                                                     }
+                                                    <li>
+                                                        <a asp-page="Login" asp-page-handler="Logout">Logout</a>
+                                                    </li>
                                                 </ul>
                                             }
                                             else

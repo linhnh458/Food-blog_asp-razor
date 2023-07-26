@@ -59,6 +59,7 @@ namespace PRN221_Project_Blog.Models
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Blogs)
                     .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Blog_Category");
             });
 
@@ -79,13 +80,17 @@ namespace PRN221_Project_Blog.Models
 
                 entity.Property(e => e.Content).HasMaxLength(3000);
 
-                entity.Property(e => e.Username).HasMaxLength(150);
-
                 entity.HasOne(d => d.Blog)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.BlogId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comment_Blog");
+
+                entity.HasOne(d => d.UserNavigation)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.User)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_User");
             });
 
             modelBuilder.Entity<Role>(entity =>

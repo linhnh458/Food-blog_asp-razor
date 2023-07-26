@@ -11,5 +11,6 @@ namespace PRN221_Project_Blog.Models
         public string EmbeddedLink { get; set; } = null!;
         public string? Description { get; set; }
         public bool Status { get; set; }
+
     }
 }

@@ -29,6 +29,10 @@ namespace PRN221_Project_Blog.Pages.Blogs
             foreach (Blog blog in AllBlogs)
             {
                 listBlogSide.Add(blog);
+                if(listBlogSide.Count >= 5)
+                {
+                    break;
+                }
             }
             SinglePost = context.Blogs.FirstOrDefault(x => x.Id == blogid);
         }

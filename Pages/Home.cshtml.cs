@@ -24,7 +24,7 @@ namespace PRN221_Project_Blog.Pages
         {
             listBlog = context.Blogs.Include(x => x.Author).ToList();
             listCate = context.Categories.ToList();
-            testimonials = context.Testimonials.ToList();
+            testimonials = context.Testimonials.Where(x => x.Status == true).ToList();
         }
 
         public IActionResult OnPost()
@@ -32,17 +32,22 @@ namespace PRN221_Project_Blog.Pages
             string name = Testimonial.Name;
             string job = Testimonial.Job;
             string content = Testimonial.Comment;
-
-            Testimonial t = new()
+            if(!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(content))
             {
-                Id = 0,
-                Name = name,
-                Job = job,
-                Content = content
-            };
-            context.Testimonials.Add(t);
-            context.SaveChanges();
-            return Redirect("/home");
+                Testimonial t = new()
+                {
+                    Id = 0,
+                    Name = name,
+                    Job = job,
+                    Content = content,
+                    Status = false
+                };
+                context.Testimonials.Add(t);
+                context.SaveChanges();
+                return Redirect("/home");
+            }
+            ViewData["Error"] = "You must enter the required fields";
+            return Page();
         }
     }
 }

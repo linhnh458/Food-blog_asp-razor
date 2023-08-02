@@ -29,17 +29,37 @@ namespace PRN221_Project_Blog.Pages.Admin.Categories
             string catename = CateName;
             if(!string.IsNullOrEmpty(catename))
             {
-                Category category = new Category()
+                if(CheckCateExistence(catename) == false)
                 {
-                    Id = 0,
-                    Category1 = catename
-                };
-                context.Categories.Add(category);
-                context.SaveChanges();
-                return Redirect("/admin/manager");
+                    Category category = new Category()
+                    {
+                        Id = 0,
+                        Category1 = catename
+                    };
+                    context.Categories.Add(category);
+                    context.SaveChanges();
+                    return Redirect("/admin/categories/categorySettings");
+                }
+                else
+                {
+                    ViewData["ErrorMessage"] = "This category has already existed";
+                    return Page();
+                }
             }
 
             return Page();
+        }
+
+        bool CheckCateExistence(string catename)
+        {
+            List<Category> listCate = context.Categories.ToList();
+            foreach(var c in listCate)
+            {
+                if(c.Category1.ToLower().Equals(catename.ToLower())) { 
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

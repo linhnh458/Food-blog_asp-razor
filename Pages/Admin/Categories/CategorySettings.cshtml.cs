@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using PRN221_Project_Blog.Models;
 
@@ -25,6 +26,26 @@ namespace PRN221_Project_Blog.Pages.Admin.Categories
             return Redirect("/login");
         }
 
+        public IActionResult OnGetDeleteCategory(int cateid)
+        {
+            Category c = context.Categories.FirstOrDefault(x => x.Id == cateid);
+            if (c != null)
+            {
+                try
+                {
+                    context.Categories.Remove(c);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ViewData["ErrorMessage"] = "Cannot delete this category, you need to delete all blogs with this category first.";
+                    return Page();
+                    //return RedirectToPage("/admin/categories/categorySettings");
+                }
+               
+            }
+            return RedirectToPage("/admin/categories/categorySettings");
+        }
 
     }
 }

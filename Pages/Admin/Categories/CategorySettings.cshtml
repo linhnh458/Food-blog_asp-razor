@@ -2,6 +2,7 @@
 @model PRN221_Project_Blog.Pages.Admin.Categories.CategorySettingsModel
 @{
     Layout = null;
+    var message = ViewData["ErrorMessage"] as string;
 }
 
 <!DOCTYPE html>
@@ -34,10 +35,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet">
+
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/demo.css" />
 </head>
 
 <style>
@@ -101,6 +103,18 @@
                         </a>
                     </li>
                     <li class="menu-item">
+                        <a href="/admin/comments/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Comment settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/testimonials/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Testimonial settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
                         <a href="/home" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Home</div>
@@ -124,7 +138,6 @@
                                         <tr class="text-nowrap">
                                             <th>ID</th>
                                             <th>Category name</th>
-                                            <th style="text-align: center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,14 +148,18 @@
                                                 <tr>
                                                     <th scope="row" className="blogid">@cate.Id}</th>
                                                     <td id="cate">@cate.Category1</td>
-                                                    <td id="cate">Delete</td>
+                                                    <td>
+                                                        <button onclick="DeleteCate(@cate.Id)" style="background-color:red;color:white">
+                                                            Delete
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             }
                                         }
                                     </tbody>
                                 </table>
-                                <a href="/admin/manager">
-                                    <button style="margin: 19px 0 19px 19px">Add blog</button>
+                                <a href="/admin/categories/addCategory">
+                                    <button style="margin: 19px 0 19px 19px">Add Category</button>
                                 </a>
                             </div>
                         </div>
@@ -160,14 +177,22 @@
     <!-- / Layout wrapper -->
 
     <script>
-        function DeleteBlog(int id) {
-            var result = confirm("Do you really want to delete this blog?");
+        function DeleteCate(id) {
+            var result = confirm("Do you really want to delete this category?");
             if (result) {
-                //Logic to delete the item
+                window.location.href = '/admin/categories/categorySettings?handler=DeleteCategory&cateid=' + id;
             }
         }
-
     </script>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+            alert('@message');
+        </script>
+    }
+}
+
 </body>
 
 </html>

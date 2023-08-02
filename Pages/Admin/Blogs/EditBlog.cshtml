@@ -1,5 +1,5 @@
 ﻿@page
-@model PRN221_Project_Blog.Pages.Admin.ManagerModel
+@model PRN221_Project_Blog.Pages.Admin.Blogs.EditBlogModel
 @{
     Layout = null;
 }
@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Admin manager</title>
+    <title>Edit blog</title>
     <meta name="description"
           content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -57,7 +57,7 @@
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="/admin/manager" class="app-brand-link">
+                    <a href="/admin/blogs/addBlog" class="app-brand-link">
                         <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: uppercase">
                             Admin menu
                         </span>
@@ -71,7 +71,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="/admin/manager" class="menu-link">
+                        <a href="/admin/blogs/addBlog" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -81,21 +81,33 @@
                         <span class="menu-header-text">Pages</span>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/blogSettings" class="menu-link">
+                        <a href="/admin/blogs/blogSettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Blog settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/category/categorySettings"" class="menu-link">
+                        <a href="/admin/categories/categorySettings" " class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Category settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="video-settings.html" class="menu-link">
+                        <a href="/admin/videos/videoSettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Video settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/comments/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Comment settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/testimonials/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Testimonial settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -107,7 +119,6 @@
                 </ul>
             </aside>
             <!-- End Menu -->
-
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
@@ -126,7 +137,7 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4" id="edit-title">Add blog</h4>
+                        <h4 class="fw-bold py-3 mb-4" id="edit-title">Edit blog</h4>
                         <div class="row">
                             <!-- Basic Layout -->
                             <div class="col-xxl">
@@ -136,14 +147,14 @@
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Title</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" asp-for="BlogCreated.Title" />
+                                                    <input type="text" class="form-control" asp-for="BlogEdit.Title" value="@Model.blog.Title" required/>
                                                 </div>
                                             </div>
 
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Description</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" asp-for="BlogCreated.Description" />
+                                                    <input type="text" class="form-control" asp-for="BlogEdit.Description" value="@Model.blog.Description" />
                                                 </div>
                                             </div>
 
@@ -152,7 +163,7 @@
                                                 <div class="col-sm-10">
                                                     <div class="input-group input-group-merge">
                                                         <select name="cates" id="cates">
-                                                            @if(Model.listCate.Count > 0)
+                                                            @if (Model.listCate.Count > 0)
                                                             {
                                                                 @foreach (var cate in Model.listCate)
                                                                 {
@@ -160,9 +171,6 @@
                                                                 }
                                                             }
                                                         </select>
-                                                        <span style="margin-top: 7px">
-                                                            <a href="/admin/categories/addCategory" style="font-size: 18px; margin-left:15px"> or add a new category</a>
-                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,20 +178,20 @@
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Image</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" name="blogimg" class="form-control" asp-for="BlogCreated.Image" />
+                                                    <input type="file" name="blogimg" class="form-control" asp-for="BlogEdit.Image" value="@Model.blog.Image" />
                                                 </div>
                                             </div>
 
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Content</label>
                                                 <div class="col-sm-10" style="width:100%">
-                                                    <textarea asp-for="BlogCreated.Content" required class="form-control" style="height:100px;" id="blog-content"></textarea>
+                                                    <textarea asp-for="BlogEdit.Content" required class="form-control" style="height:100px;" value="@Model.blog.Content" id="blog-content"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Date created</label>
                                                 <div class="col-sm-10">
-                                                    <input type="date" class="form-control" required asp-for="BlogCreated.CreatedDate" />
+                                                    <input type="date" class="form-control" required asp-for="BlogEdit.CreatedDate" value="@Model.blog.CreatedDate.ToString("yyyy-MM-dd")" />
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -197,7 +205,7 @@
                                             </div>
                                             <div class="row justify-content-end" id="send">
                                                 <div class="col-sm-10">
-                                                    <button class="btn btn-primary">Create</button>
+                                                    <button class="btn btn-primary">Save</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -220,21 +228,10 @@
 
 
     </div>
+   
     <!-- / Layout wrapper -->
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
     <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
-    <!-- Vendors JS -->
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-
-    <!--giu nguyen format-->
     <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('blog-content');
@@ -245,40 +242,4 @@
 </body>
 
 </html>
-<script>
-    (function () {
-        var ws = new WebSocket('ws://' + window.location.host +
-            '/jb-server-page?reloadMode=RELOAD_ON_SAVE&' +
-            'referrer=' + encodeURIComponent(window.location.pathname));
-        ws.onmessage = function (msg) {
-            if (msg.data === 'reload') {
-                window.location.reload();
-            }
-            if (msg.data.startsWith('update-css ')) {
-                var messageId = msg.data.substring(11);
-                var links = document.getElementsByTagName('link');
-                for (var i = 0; i < links.length; i++) {
-                    var link = links[i];
-                    if (link.rel !== 'stylesheet') continue;
-                    var clonedLink = link.cloneNode(true);
-                    var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
-                    if (newHref !== link.href) {
-                        clonedLink.href = newHref;
-                    }
-                    else {
-                        var indexOfQuest = newHref.indexOf('?');
-                        if (indexOfQuest >= 0) {
-                            // to support ?foo#hash
-                            clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' +
-                                newHref.substring(indexOfQuest + 1);
-                        }
-                        else {
-                            clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
-                        }
-                    }
-                    link.replaceWith(clonedLink);
-                }
-            }
-        };
-    })();
-</script>
+

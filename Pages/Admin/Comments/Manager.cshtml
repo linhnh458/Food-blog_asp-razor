@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Add video</title>
+    <title>Comment manager</title>
     <meta name="description"
           content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -34,10 +34,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet">
+
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/demo.css" />
 </head>
 
 <style>
@@ -95,9 +96,21 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/admin/videoSettings" class="menu-link">
+                        <a href="/admin/videos/videoSettings" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Tables">Video settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/comments/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Comment settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/testimonials/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Testimonial settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -123,7 +136,10 @@
                                     <thead>
                                         <tr class="text-nowrap">
                                             <th>ID</th>
+                                            <th>Blog ID</th>
+                                            <th>Blog name</th>
                                             <th>Comment</th>
+                                            <th>Status</th>
                                             <th style="text-align: center">Action</th>
                                         </tr>
                                     </thead>
@@ -134,16 +150,29 @@
                                             {
                                                 <tr>
                                                     <th scope="row" className="blogid">@comm.Id}</th>
+                                                    <td>@comm.Blog.Id</td>
+                                                    <td>@comm.Blog.Title</td>
                                                     <td>@comm.Content</td>
-                                                    <td>Delete</td>
+                                                    <td>@comm.Status</td>
+                                                    @if(@comm.Status == 1)
+                                                    {
+                                                        <td>
+                                                            <button onclick="changeStatus(@comm.Id)" style="background-color:red;color:white">
+                                                                Hide
+                                                            </button>
+                                                        </td>
+                                                    }else{
+                                                        <td>
+                                                            <button onclick="changeStatus(@comm.Id)" style="background-color:green;color:white">
+                                                                Show
+                                                            </button>
+                                                        </td>
+                                                    }
                                                 </tr>
                                             }
                                         }
                                     </tbody>
                                 </table>
-                                <a href="/admin/manager">
-                                    <button style="margin: 19px 0 19px 19px">Add blog</button>
-                                </a>
                             </div>
                         </div>
                         <!--/ Responsive Table -->
@@ -160,14 +189,15 @@
     <!-- / Layout wrapper -->
 
     <script>
-        function DeleteBlog(int id) {
-            var result = confirm("Do you really want to delete this blog?");
-            if (result) {
-                //Logic to delete the item
+        function changeStatus(id) {
+            var c = confirm("Do you want to change status of this comment ?")
+            if (c) {
+                window.location.href = '/admin/comments/manager?handler=ChangeStatus&id=' + id;
             }
         }
-
     </script>
+
+
 </body>
 
 </html>

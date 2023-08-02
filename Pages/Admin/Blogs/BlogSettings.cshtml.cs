@@ -23,10 +23,10 @@ namespace PRN221_Project_Blog.Pages.Admin.Blogs
             {
                 return NotFound();
             }
-            //context.Blogs.Remove(blog);
-            //context.SaveChanges();
+            context.Blogs.Remove(blog);
+            context.SaveChanges();
             ViewData["Message"] = "Deleted successfully";
-            return Redirect("/Admin/BlogSettings");
+            return Redirect("/admin/blogs/blogSettings");
         }
     }
 }

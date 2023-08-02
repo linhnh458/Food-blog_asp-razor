@@ -2,6 +2,7 @@
 @model PRN221_Project_Blog.Pages.Admin.Categories.AddCategoryModel
 @{
     Layout = null;
+    var message = ViewData["ErrorMessage"] as string;
 }
 
 <!DOCTYPE html>
@@ -102,6 +103,18 @@
                         </a>
                     </li>
                     <li class="menu-item">
+                        <a href="/admin/comments/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Comment settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/testimonials/manager" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Testimonial settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
                         <a href="/home" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Home</div>
@@ -143,7 +156,7 @@
                                             </div>
                                             <div class="row justify-content-end" id="send">
                                                 <div class="col-sm-10">
-                                                    <button class="btn btn-primary" id="btn-add-vid">Send</button>
+                                                    <button class="btn btn-primary" id="btn-add-vid">Add</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -165,6 +178,12 @@
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
 
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+            alert('@message');
+        </script>
+    }
 
     </div>
 </body>
